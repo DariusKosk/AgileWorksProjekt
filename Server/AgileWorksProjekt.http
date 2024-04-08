@@ -1,0 +1,6 @@
+@AgileWorksProjekt_HostAddress = http://localhost:5044
+
+GET {{AgileWorksProjekt_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
