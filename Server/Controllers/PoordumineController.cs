@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using AgileWorksProjekt.Server.Models; // Lisa vajadusel ruumid
+using AgileWorksProjekt.Server.Models; 
 using System;
 using System.Collections.Generic;
 

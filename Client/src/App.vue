@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Tere, maailm! :)"/>
+    <Poordumine msg="Pöördumise lisamine"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Poordumine from './components/Poordumine.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Poordumine
   }
 }
 </script>

@@ -1,6 +1,25 @@
-@AgileWorksProjekt_HostAddress = http://localhost:5044
+# Pöördumiste loomine
+POST {{AgileWorksProjekt_HostAddress}}/api/poordumine
+Content-Type: application/json
 
-GET {{AgileWorksProjekt_HostAddress}}/weatherforecast/
+{
+  "kirjeldus": "Testpöördumine",
+  "sisestamiseAeg": "2024-04-10T12:00:00",
+  "lahendamiseTähtaeg": "2024-04-15T12:00:00"
+}
+
+###
+
+# Aktiivsete pöördumiste kuvamine
+GET {{AgileWorksProjekt_HostAddress}}/api/poordumine
 Accept: application/json
 
 ###
+
+# Pöördumise märkimine lahendatuks
+PUT {{AgileWorksProjekt_HostAddress}}/api/poordumine/{id}
+Content-Type: application/json
+
+{
+  "lahendatud": true
+}
