@@ -1,12 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddAuthorization(); // Lisage siia autoriseerimisteenus
+builder.Services.AddAuthorization(); 
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -14,10 +12,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseAuthorization(); 
 
-app.UseAuthorization(); // Kasutage autoriseerimist
+app.UseCors(builder => 
+{
+    builder.WithOrigins("http://localhost:8080")
+           .AllowAnyHeader()
+           .AllowAnyMethod();
+});
 
-app.MapControllers(); // Lisage kontrollerite marsruudid
+app.MapControllers(); 
 
 app.Run("http://localhost:5050");

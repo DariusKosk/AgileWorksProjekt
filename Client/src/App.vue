@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Poordumine msg="Pöördumise lisamine"/>
+    <Poordumine/>
   </div>
 </template>
 

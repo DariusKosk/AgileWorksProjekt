@@ -12,29 +12,52 @@ namespace AgileWorksProjekt.Server.Controllers
         private static List<Poordumine> poordumised = new List<Poordumine>();
 
         [HttpGet]
-        public IEnumerable<Poordumine> Get()
+        public ActionResult<IEnumerable<Poordumine>> Get()
         {
-            return poordumised;
+            return Ok(poordumised);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Poordumine poordumine)
+        public ActionResult<Poordumine> Post([FromBody] Poordumine poordumine)
         {
+            if (poordumine == null)
+            {
+                return BadRequest();
+            }
+
             poordumine.SisestamiseAeg = DateTime.Now;
             poordumised.Add(poordumine);
-            return Ok();
+            return CreatedAtAction(nameof(Get), new { id = poordumine.Id }, poordumine);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id)
+        [HttpDelete("{id}")]
+        public IActionResult KustutaPoordumine(int id)
         {
-            var poordumine = poordumised.Find(p => p.Id == id);
+            var poordumine = poordumised.FirstOrDefault(p => p.Id == id);
             if (poordumine == null)
+            {
+                return NotFound(); 
+            }
+
+            poordumised.Remove(poordumine);
+            return Ok(); 
+}
+
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] Poordumine updatedPoordumine)
+        {
+            if (updatedPoordumine == null || updatedPoordumine.Id != id)
+            {
+                return BadRequest();
+            }
+
+            var existingPoordumine = poordumised.Find(p => p.Id == id);
+            if (existingPoordumine == null)
             {
                 return NotFound();
             }
-            poordumine.Lahendatud = true; 
-            return Ok();
+            return NoContent();
         }
     }
 }
