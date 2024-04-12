@@ -33,7 +33,7 @@ namespace AgileWorksProjekt.Server.Controllers
         [HttpDelete("{id}")]
         public IActionResult KustutaPoordumine(int id)
         {
-            var poordumine = poordumised.FirstOrDefault(p => p.Id == id);
+            var poordumine = poordumised.FirstOrDefault(p => p.Id.Equals(id));
             if (poordumine == null)
             {
                 return NotFound(); 
@@ -47,12 +47,12 @@ namespace AgileWorksProjekt.Server.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Poordumine updatedPoordumine)
         {
-            if (updatedPoordumine == null || updatedPoordumine.Id != id)
+            if (updatedPoordumine == null || !updatedPoordumine.Id.Equals(id))
             {
                 return BadRequest();
             }
 
-            var existingPoordumine = poordumised.Find(p => p.Id == id);
+            var existingPoordumine = poordumised.Find(p => p.Id.Equals(id));
             if (existingPoordumine == null)
             {
                 return NotFound();
